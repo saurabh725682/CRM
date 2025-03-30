@@ -38,11 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # My apps
     'crm',
-     
-            
+         
 ]
 
  
@@ -83,10 +80,15 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'crmdb',
+        'USER': 'maurya',
+        'PASSWORD': 'db4crm',
+        'HOST': '127.0.0.1',  # Change to your database host (e.g., AWS RDS, DigitalOcean)
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
