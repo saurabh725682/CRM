@@ -13,7 +13,6 @@ def home(request):
     return render(request, 'crm/index.html')
 
 # Register --
-
 def register(request):
     form = CreateUserForm()
     
@@ -28,8 +27,8 @@ def register(request):
     context = {'form': form}
     return render(request, 'crm/register.html', context=context)
 
-# Login --
 
+# Login --
 def my_login(request):
     form = LoginForm()
     
@@ -52,22 +51,22 @@ def my_login(request):
     context = {'form': form}
     return render(request, 'crm/my-login.html', context=context)
 
-# User logout --
 
+# User logout --
 def logout(request):
     auth.logout(request)  
     return redirect('my-login')
 
-# Dashboard --
 
+# Dashboard --
 @login_required(login_url='my-login')
 def dashboard(request):   
     my_records = Record.objects.all()
     context = {'records': my_records}
     return render(request, 'crm/dashboard.html', context=context)
 
-# Create a record --
 
+# Create a record --
 @login_required(login_url='my-login')
 def create_record(request):
     form = CreateRecordForm(request.POST)
@@ -81,8 +80,8 @@ def create_record(request):
     context = {'form': form}
     return render(request, 'crm/create-record.html', context=context)
 
-# Update a record --
 
+# Update a record --
 def update_record(request, pk):
     record = Record.objects.get(id=pk)
     
@@ -98,16 +97,16 @@ def update_record(request, pk):
     context = {'form': form}
     return render(request, 'crm/update-record.html', context=context)
 
-# Read / View a singular record --
 
+# Read / View a singular record --
 @login_required(login_url='my-login')
 def view_record(request, pk):
     all_records = Record.objects.get(id=pk)
     context = {'record': all_records}
     return render(request, 'crm/view-record.html', context=context)
 
-# Delete a record --
 
+# Delete a record --
 @login_required(login_url='my-login')
 def delete_record(request, pk):
     record = Record.objects.get(id=pk)
