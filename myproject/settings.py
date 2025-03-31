@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
 
-ALLOWED_HOSTS = ['crm.onrender.com']
+ALLOWED_HOSTS = ['crm-8pw2.onrender.com']
 
 
 # Application definition
