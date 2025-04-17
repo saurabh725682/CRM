@@ -8,14 +8,12 @@ from .models import Record
 
 # Create your views here --
 
-def home(request):     
-     
+def home(request):       
     return render(request, 'crm/index.html')
 
 # Register --
 def register(request):
     form = CreateUserForm()
-    
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -30,8 +28,7 @@ def register(request):
 
 # Login --
 def my_login(request):
-    form = LoginForm()
-    
+    form = LoginForm() 
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         
@@ -57,7 +54,6 @@ def logout(request):
     auth.logout(request)  
     return redirect('my-login')
 
-
 # Dashboard --
 @login_required(login_url='my-login')
 def dashboard(request):   
@@ -65,12 +61,10 @@ def dashboard(request):
     context = {'records': my_records}
     return render(request, 'crm/dashboard.html', context=context)
 
-
 # Create a record --
 @login_required(login_url='my-login')
 def create_record(request):
-    form = CreateRecordForm(request.POST)
-    
+    form = CreateRecordForm(request.POST)   
     if form.is_valid():
         form.save()
         return redirect('dashboard')
@@ -79,7 +73,6 @@ def create_record(request):
     
     context = {'form': form}
     return render(request, 'crm/create-record.html', context=context)
-
 
 # Update a record --
 def update_record(request, pk):
@@ -97,14 +90,12 @@ def update_record(request, pk):
     context = {'form': form}
     return render(request, 'crm/update-record.html', context=context)
 
-
 # Read / View a singular record --
 @login_required(login_url='my-login')
 def view_record(request, pk):
     all_records = Record.objects.get(id=pk)
     context = {'record': all_records}
     return render(request, 'crm/view-record.html', context=context)
-
 
 # Delete a record --
 @login_required(login_url='my-login')
